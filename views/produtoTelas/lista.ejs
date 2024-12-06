@@ -1,0 +1,55 @@
+<%-include('../includes/header.ejs', {titulo:'Lista de produtos'})%>
+
+<main>
+
+
+  <a href="/produto/novo" class="btn" style="background-color: green;color: white;">Adicionar Produto</a>
+  <h2>Lista de Produtos</h2>
+
+
+
+  <form action="/produto/" method="GET" class="form form-consulta">
+    <input type="text" name="busca" value="<%= busca %>" placeholder="Buscar produto" />
+    <button type="submit" class="btn btn-buscar ">Buscar</button>
+    <select name="ordenar" onchange="this.form.submit()">
+      <option value="nome_produto" <%= ordenar == 'nome_produto' ? 'selected': ''%>>Ordenar por Produto</option>
+      <option value="nome" <%= ordenar == 'nome' ? 'selected': ''%>>Ordenar por Categoria</option>
+    </select>
+  </form>
+
+
+
+
+  <table class="dados-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Estoque</th>
+        <th>Estoque minimo</th> 
+        <th>Valor</th>
+        <th>Imagem</th>
+        <th>Categoria</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let produto of Dados) { %>
+        <tr>
+            <td><%= produto.nome_produto %></td>
+                              <td><%= produto.estoque %></td>
+                              <td><%= produto.estoque_minimo %></td>
+                              <td><%= produto.valor %></td>
+                              <td><img src="<%= produto.imagem %>" alt="Imagem do produto" class="img-fluid" style="max-width: 100px; height: auto;"></td>
+                              <td><%= produto.nome %></td>
+            <td>
+                <a href="/produto/<%= produto.id_produto%>/editar" class="btn btn-edit">Editar</a>
+                <form action="/produto/<%= produto.id_produto%>/deletar" method="POST" onsubmit="return confirmDelete()">
+                  <button type="submit" class="btn btn-delete">Excluir</button>
+                </form>
+            </td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+</main>
+<%- include('../includes/footer.ejs')%>

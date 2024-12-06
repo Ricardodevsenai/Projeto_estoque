@@ -1,0 +1,42 @@
+<%-include('../includes/header.ejs', {titulo:'Lista de Categorias'})%>
+
+<main>
+  <a href="/categoria/novo" class="btn" style="background-color: green;color: white;">Adicionar Categoria</a>
+  <h2>Lista de Categorias</h2>
+
+  <form action="/categoria/" method="GET" class="form form-consulta">
+    <input type="text" name="busca" value="<%= busca %>" placeholder="Buscar categoria" />
+    <button type="submit" class="btn" style="background-color: green; color: white;">Buscar</button>
+    <select name="ordenar" onchange="this.form.submit()">
+      <option value="nome" <%= ordenar == 'nome' ? 'selected': ''%>>Ordenar por categoria</option>
+    </select>
+  </form>
+
+
+  <table class="dados-table">
+    <thead>
+      <tr>
+        <th>Nomes</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let categoria of categorias) { %>
+        <tr>
+          <td><%= categoria.nome %></td>
+            <td>
+              <a href="/categoria/<%= categoria.id_categoria %>/editar" class="btn btn-edit">Editar</a>
+              <form action="/categoria/<%= categoria.id_categoria %>/deletar" method="POST" onsubmit="return confirmDelete()">
+                <button type="submit" class="btn btn-delete">Excluir</button>
+              </form>
+            </td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+</main>
+<%- include('../includes/footer.ejs')%>
+
+
+
+

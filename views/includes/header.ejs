@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Administrativa - Sistema de Estoque - <%= titulo %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src= "https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body >
+    <header class="d-flex flex-row justify-content-between" >
+     
+        <div style="display: flex;margin-left: 530px;" >
+            
+        <nav> 
+        <h1 class="" style="text-align: center;">Sistema de Estoque</h1>
+            <a class="tirarconfigs" href="/admin">Dashboard</a>
+            <a class="tirarconfigs" href="/categoria">Categorias</a>
+            <a class="tirarconfigs" href="/usuario">Usuarios</a>
+            <a class="tirarconfigs" href="/produto">Produtos</a>
+        </nav>
+
+    </div>
+
+        <div class="m-1">
+            
+        <p><h5>Seja bem vindo <br><%=nomeUsuario%>!  <br><a href="/auth/logout"  class="tirarconfigs" style="color: rgb(255, 255, 255);" style="align-content: right; "><i class="bi bi-door-open-fill  "></i>Sair</a></h5></p>
+        </div>
+    
+    </header>
+</body>
+</html>

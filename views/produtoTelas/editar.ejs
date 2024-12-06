@@ -1,0 +1,189 @@
+<%-include('../includes/header.ejs', {titulo:'Editando Produto'})%>
+<link rel="stylesheet" href="/css/styles.css" />
+<main>
+<h2>Editando Produto <%= produto.nome_produto%></h2>
+    <div class="container">
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs position-relative top-100" id="myTab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#editar" type="button"
+                    aria-controls="editar" aria-selected="true" style="color: rgb(244, 245, 244); background-color: rgb(51, 103, 8);  ">
+                    Editando produto
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#lancar-notas" type="button"
+                    aria-controls="lancar-notas" aria-selected="false" style="color: rgb(244, 245, 244); background-color: rgb(51, 103, 8); right: 10px; ">
+                    Lançar Movimentação
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="notas-tab" data-bs-toggle="tab" data-bs-target="#notas" type="button"
+                    aria-controls="notas" aria-selected="false" style="color: rgb(244, 245, 244); background-color: rgb(51, 103, 8);" >
+                    Movimentações
+                </button>
+            </li>
+        </ul>
+                 
+        <!-- Tab Content -->
+        <div class="tab-content" id="myTabContent">
+            <!-- Aba para Editar o Aluno -->
+            <div class="tab-pane fade show active p-3" id="editar">
+                
+
+                    <form action="/produto/<%= produto.id_produto%>/editar" method="POST" class="form">
+                        <div class="form-group">
+                            <label for="nome_produto"> Nome do Produto</label>
+                            <input type="text" id="nome_produto" name="nome_produto" value="<%= produto.nome_produto %>" required>
+                
+                
+                        </div>
+                        <div class="form-group">
+                            <label for="estoque"> Estoque</label>
+                            <input type="number" id="estoque" name="estoque" value="<%= produto.estoque %>" readonly>
+                
+                
+                        </div>
+                        <div class="form-group">
+                            <label for="estoque_minimo"> Estoque Minimo</label>
+                            <input type="number" id="estoque_minimo" name="estoque_minimo" value="<%= produto.estoque_minimo %>" required>
+                
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="valor"> Valor</label>
+                            <input type="number" id="valor" name="valor" value="<%= produto.valor %>" required>
+                
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="imagem"> Imagem</label>
+                            <input type="text" id="imagem" name="imagem" value="<%= produto.imagem %>" required>
+                
+                        </div>
+                        <div class="form-group">
+                            <label for="id_categoria">Categoria</label>
+                            <select id="id_categoria" name="id_categoria">
+                            <option>Selecione uma Categoria</option>
+                
+                            
+                                <% for (let categoria of categoriaCadastrados) { %>
+                                    <option value="<%= categoria.id_categoria %>"
+                                        <% if (categoria.id_categoria==produto.id_categoria) { %>   
+                                            selected
+                                        <% } %>
+                                    ><%= categoria.nome %></option>
+                                <% } %>
+                        </select>
+                
+                        </div>
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <a href="/produto" class="btn btn-secondary " >Cancelar</a>
+                    </form>  
+            </div>
+            <!-- Aba para lançar as notas -->
+            <div class="tab-pane fade p-3" id="lancar-notas">
+                <h2> Movimentação </h2>
+
+                    <form action="/produto/<%= produto.id_produto%>/lancar-nota" method="POST" class="form">
+                        <div class="form-group">
+                            <label for="tipo_movimentacao">Tipo Movimentação</label>
+                            <select id="tipo_movimentacao" name="tipo_movimentacao">
+                            <option>Selecione uma Movimentação</option>
+            
+                            <option >Entrada</option>
+                            <option >Saida</option>
+            
+                        </select>
+                
+                
+                        </div>
+                        <div class="form-group">
+                            <label for="data_movimentacao"> Data Movimentação</label>
+                            <input type="date" id="data_movimentacao" name="data_movimentacao" required>
+                
+                
+                        </div>
+                        <div class="form-group">
+                            <label for="quantidade"> Quantidade</label>
+                            <input type="number" id="quantidade" name="quantidade" required>
+                
+                        </div>
+                
+                        <div class="form-group">
+                            <label for="descricao"> Descrição</label>
+                            <input type="text" id="descricao" name="descricao"  required>
+                
+                        </div>
+                
+                        
+                        <div class="form-group">
+                            <label for="id_usuario">Usuario</label>
+                            <select id="id_usuario" name="id_usuario">
+                            <option>Selecione um Usuario</option>
+                
+                            
+                                <% for (let usuario of usuarios) { %>
+                                    <option value="<%= usuario.id_usuario %>"
+                                      
+                                    ><%= usuario.nome %></option>
+                                <% } %>
+                        </select>
+                
+                        </div>
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <a href="/produto" class="btn btn-secondary " >Cancelar</a>
+                    </form>
+            </div>
+
+            <!-- Aba para exibir as notas -->
+            <div class="tab-pane fade p-3" id="notas">
+            
+                
+
+                <table class="dados-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo Movimentacao</th>
+                            <th>Data Movimentacao</th>
+                            <th>Quantidade</th>
+                            <th>Descrição</th>
+                            <th>Usuario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for (let tabela of tabelas) { %>
+                        <tr>
+                            <td><%=tabela.tipo_movimentacao%></td>
+                            <td><%=tabela.data_movimentacao%></td>
+                            <td><%=tabela.quantidade%></td>
+                            <td><%=tabela.descricao%></td>
+                            <td><%=tabela.nome%></td>
+                        </tr>
+                            
+                        <%}%>
+                    </tbody>
+                   </table>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+</main>
+<%- include('../includes/footer.ejs')%>

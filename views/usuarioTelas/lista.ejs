@@ -1,0 +1,44 @@
+<%-include('../includes/header.ejs', {titulo:'Lista Usuarios'})%>
+
+<main>
+ <a href="/usuario/novo" class="btn" style="background-color: green; color: white;">Adicionar Usuario</a>
+  <h2>Lista de Usuarios</h2>
+
+  
+  <form action="/usuario/" method="GET" class="form form-consulta">
+    <input type="text" name="busca" value="<%= busca %>" placeholder="Buscar usuario" />
+    <button type="submit" class="btn" style="background-color: green; color: white;">Buscar</button>
+    <select name="ordenar" onchange="this.form.submit()">
+      <option value="nome" <%= ordenar == 'nome' ? 'selected': ''%>>Ordenar por Usuario</option>
+    </select>
+  </form>
+
+
+
+
+ 
+  <table class="dados-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Usuário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for (let usuario of Dados) { %>
+        <tr>
+            <td><%= usuario.nome %></td>
+                  <td><%= usuario.usuario %></td>
+            <td>
+                <a href="/usuario/<%= usuario.id_usuario %>/editar" class="btn btn-edit">Editar</a>
+                <form action="/usuario/<%= usuario.id_usuario %>/deletar" method="POST" onsubmit="return confirmDelete()">
+                  <button type="submit" class="btn btn-delete">Excluir</button>
+                </form>
+            </td>
+        </tr>
+      <%}%>
+    </tbody>
+  </table>
+</main>
+<%- include('../includes/footer.ejs')%>
