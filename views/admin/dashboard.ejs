@@ -38,6 +38,19 @@
             <p class="card-text display-4"><%=totalEstoque %></p>
           </div>
         </div>
+
+        
+          <div class="centralizar"> 
+            <div class="col-md-3 mt-3 text-center">
+              <div class="card shadow-sm card-dec" style="align-items: center;">
+                <h5 class="card-body" style="text-align: center;">Produtos abaixo do Estoque </h5>
+                <p class="card-text text-center display-4"><%= abaixo %></p>
+              </div>
+            
+            </div>
+            </div>
+        
+
       </section>
 
 
@@ -130,17 +143,7 @@ const total = dadosaprovacaoalunos.map(x=> x.valor_produtos)
 </script>
 <h3><div class="card-header text-white mt-4" style="text-align: center; background-color:rgb(189, 189, 189);"></div>
 </h3>
-<div class="container">
-  <div class="row">
-    <div class="col-md-3">
-      <div class="card shadow-sm card-dec" style="align-items: center;">
-        <h5 class="card-body" style="text-align: center;">Produtos abaixo do Estoque </h5>
-        <p class="card-text text-center display-4"><%= abaixo %></p>
-      </div>
-    </div>
-    
-    </div>
-</div>
+
       <table class="dados-table">
         <thead>
           <tr>

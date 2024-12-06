@@ -201,3 +201,9 @@ body {
   .grafico{
     width: 370px;
   }
+
+  .centralizar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
