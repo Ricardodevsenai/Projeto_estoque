@@ -111,6 +111,7 @@ router.get("/:id/editar", async (req, res) => {
   }
 });
 
+
 router.post("/:id/deletar", async (req, res) => {
   const { id } = req.params;
   //await BD.query("delete from produtos where id_produto = $1", [id]);
